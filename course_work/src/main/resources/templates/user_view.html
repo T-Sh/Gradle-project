@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="rus" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+
+    <div th:replace="fragments/head :: head"></div>
+    <link rel="stylesheet" href="../static/res/styles/goal.css">
+</head>
+<body>
+
+<div class="container text-center">
+    <div th:replace="fragments/header.html :: header"></div>
+    <main>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div>
+                    <img class="img-fluid mb-2"
+                         th:src="@{'/img/' + ${user.getId()} + '.jpg'}"
+                         onerror="this.src='/img/default.svg'"
+                         height="128"><br>
+                </div>
+                <label style="font-size: 22px; color: green">[[${user.getCoins()}]]</label><br>
+                <label style="font-size: 22px; color: blue">[[${user.getNickname()}]]</label><br>
+
+            </div>
+
+            <div class="col-md-8">
+                <div class="container" th:each="goal : ${goals}">
+                    <div class="goal" style="background-color: white">
+                        <div class="row">
+                            <div class="mr-4 mt-3 col">
+                                <p th:text="${goal.getText()}"></p>
+                            </div>
+                            <div class="mr-4 mt-3 col">
+                                <p th:text="${goal.getEvidence()}"></p>
+                            </div>
+                            <div th:if="${goal.isDone()}" class="col-2 mr-4 mt-3">[[${goal.getDateOfComp()}]]</div>
+                            <div th:if="${!goal.isDone()}" class="col-2 mr-4 mt-3">-</div>
+                            <div class="mr-4 col-2">
+                                <div class="mb-2 mt-2">
+                                    <a th:href="@{/comments(goalId=${goal.getId()})}">
+                                        <img alt="Комментарии" src="../static/res/comment.svg" height="40">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${goal.isDone()}">
+                            <div class="col-1 mr-2 ml-2">
+                                <p>Оценить:</p>
+                            </div>
+                            <div class="col mr-2 ml-1">
+                                <form method="post" th:action="@{/grade(goalId=${goal.getId()}, userId=${user.getId()})}" oninput="level.value = grade.valueAsNumber">
+                                    <p>
+                                        <input class="custom-range" name="grade" type="range" min="-10" max="10" step="1">
+                                        <div class="mt-2">
+                                            <output style="color: #007eff;font-size: 20px" for="grade" name="level">0</output>
+                                            <input class="btn btn-success mr-2 ml-3" type="submit" value="Сохранить">
+                                        </div>
+
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

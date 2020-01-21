@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="rus" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+
+    <div th:replace="fragments/head :: head"></div>
+
+</head>
+<body>
+<div class="container text-center">
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <main>
+        <div style="width: 250px;margin-left: auto;margin-right: auto;">
+            <div>
+                <img class="img-fluid mb-2"
+                     th:src="@{'/img/' + ${user.getId()} + '.jpg'}"
+                     onerror="this.src='/img/default.svg'"
+                     height="128"><br>
+            </div>
+            <label style="font-size: 22px; color: green">[[${user.getCoins()}]]</label><br>
+            <label style="font-size: 22px; color: blue">[[${user.getNickname()}]]</label><br>
+            <a class="btn btn-light mt-3 mb-2" href="/edit_profile">Редактировать профиль</a><br>
+            <div>
+                <a class="btn btn-warning mb-2 mt-3" href="/users" th:if="${user.isAdmin()}">Список пользователей</a>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div>
+
+
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

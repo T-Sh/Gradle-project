@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="rus" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка доступа</title>
+
+    <div th:replace="fragments/head :: head"></div>
+
+</head>
+<body>
+<div class="container text-center">
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <main>
+        <p style="color: red; font-size: 30px">
+            У вас недостаточно прав для посещения этой страницы!
+        </p>
+    </main>
+
+    <div th:replace="fragments/scripts.html :: scripts"></div>
+
+</div>
+
+</body>

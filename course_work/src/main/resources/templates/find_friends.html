@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="rus" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск друзей</title>
+    <link rel="stylesheet" href="../static/res/styles/inputs.css">
+
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<div class="container text-center">
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <main>
+        <div>
+            <form method="post" th:action="@{/filter_new_friends}">
+                <label>Поиск:
+                    <input style="width: 450px" class="text-input ml-2" name="filter" type="text" placeholder="Введите имя">
+                </label>
+                <input class="btn btn-info ml-3 mr-5" type="submit" value="Найти">
+            </form>
+        </div>
+        <div class="card-columns mt-5">
+            <div class="card"
+                 style="width: 200px; background-color: cyan; border: 1px solid black"
+                 th:if="${!users.isEmpty()}"
+                 th:each="user : ${users}">
+                <a th:href="@{/userId(userId=${user.getId()})}">
+                    <div>
+                        <img class="card-img-top img-fluid"
+                             th:src="@{'/img/' + ${user.getId()} + '.jpg'}"
+                             onerror="this.src='/img/default.svg'"
+                             alt="Изображение"
+                             height="128"
+                             width="128">
+                        <div class="card-body">
+                            <p class="card-title" th:text="${user.getNickname()}"></p>
+                            <a class="btn btn-success card-text"
+                               th:if="${current}!=${user.getId()}"
+                               th:href="@{/add_friend(userId=${user.getId()})}">
+                                Добавить в друзья
+                            </a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

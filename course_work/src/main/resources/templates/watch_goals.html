@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="rus"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр целей</title>
+    <link rel="stylesheet" href="../static/res/styles/goal.css">
+
+    <script>
+        function generateColor() {
+            return '#' + Math.floor(Math.random()*16777215).toString(16)
+        }
+    </script>
+
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<script>
+    generateColor();
+</script>
+
+<div class="container text-center">
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <main>
+        <div class="mt-3" th:if="${goals.isEmpty()}">
+            <p style="font-size: 26px; color: darkblue">
+                Список пуст. Побробуйте создать новую цель!
+            </p>
+
+        </div>
+        <div th:each="goal : ${goals}">
+            <div  class="row goal" id="goal" th:if="${!goal.isDone()}">
+                <div class="mr-4 mt-3 col-4">
+                    <p th:text="${goal.getText()}"></p>
+                </div>
+                <div class="mr-4 mt-2 col-3">
+                    <p th:text="'Осталось времени:   ' + ${goal.leftTime()}"></p>
+                    <a th:href="@{/comments(goalId=${goal.getId()})}">
+                        <img alt="Комментарии" src="../static/res/comment.svg" height="40">
+                    </a>
+                </div>
+                <div class="ml-5 mt-2 col-sm">
+                    <a class="btn btn-light mb-2" th:href="@{/edit_goal(goalId=${goal.getId()})}">Редактировать</a><br>
+                    <a class="btn btn-danger mb-2" th:href="@{/delete(goalId=${goal.getId()})}">Удалить</a>
+                </div>
+            </div>
+
+            <div class="row goal" style="background-color: white" th:if="${goal.isDone()}">
+
+                <div class="mr-4 mt-3 col-4">
+                    <p th:text="${goal.getText()}"></p>
+                </div>
+                <div class="mr-4 mt-3 col-4">
+                    <p th:text="${goal.getEvidence()}"></p>
+                </div>
+                <div class="col-2 mr-4 mt-3">[[${goal.getDateOfComp()}]]</div>
+                <div class="mr-4 col-sm">
+                    <div class="mb-2 mt-2">
+                        <a th:href="@{/comments(goalId=${goal.getId()})}">
+                            <img alt="Комментарии" src="../static/res/comment.svg" height="40">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div>
+
+<script>
+    document.getElementById('goal').style.backgroundColor = generateColor();
+</script>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

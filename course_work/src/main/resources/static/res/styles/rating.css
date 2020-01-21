@@ -1,0 +1,22 @@
+.user {
+    background-color: aqua;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+main > div {
+    width: 500px;
+    margin: 0 auto;
+}
+
+main > div > div:nth-child(1) {
+    border: 5px solid gold;
+}
+
+main > div > div:nth-child(2) {
+    border: 5px solid silver;
+}
+
+main > div > div:nth-child(3) {
+    border: 5px solid #cd7f32;
+}

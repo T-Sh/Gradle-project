@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html  lang="rus"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование цели</title>
+    <link rel="stylesheet" href="../static/res/styles/inputs.css">
+
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<div class="container text-center">
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <main>
+        <div class="mb-4 mt-2">
+            <p style="font-size: 20px">Редактировать цель</p>
+            <form th:action="@{/edit_goal(goalId=${goal.getId()})}" method="post">
+                <p><input class="text-input" name="text" type="text" th:value="${goal.getText()}"></p>
+                <p><input class="text-input" name="setTime" type="date" th:value="${goal.getSetTime()}"></p>
+                <input class="btn btn-success" type="submit" value="Изменить">
+            </form>
+        </div>
+
+        <div class="mb-3">
+            <p style="font-size: 20px">Приложите доказательство</p>
+            <form method="post" th:action="@{/do_goal(goalId=${goal.getId()})}">
+                <p><textarea class="text-input" name="evidence" rows="5" cols="30"></textarea></p>
+                <input class="btn btn-info" type="submit" value="Выполнить">
+            </form>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="rus"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+</head>
+<body>
+    <header th:fragment="header" class="mt-2 mb-4">
+
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: deepskyblue">
+
+            <a class="navbar-brand" href="/main">
+                <img class="mr-3" alt="Главная страница" src="../../static/res/main_icon.svg" height="64">
+                <label class="mr-4">Goal App</label>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item mr-3 mb-2">
+                        <a class="btn btn-light" href="/create_goal">Создать цель</a>
+                    </li>
+                    <li class="nav-item mr-3 mb-2">
+                        <a class="btn btn-light" href="/watch_goals">Просмотр целей</a>
+                    </li>
+                    <li class="nav-item mr-3 mb-2">
+                        <a class="btn btn-light" href="/list_of_friends">Список друзей</a>
+                    </li>
+                    <li class="nav-item mr-3 mb-2">
+                        <a class="btn btn-light" href="/history">История изменений</a>
+                    </li>
+                    <li class="nav-item mr-3 mb-2">
+                        <a class="btn btn-light" href="/rating">Рейтинг</a>
+                    </li>
+                </ul>
+            </div>
+
+            <form class="mb-2" th:action="@{/logout}" method="post">
+                <input class="btn btn-danger" type="submit" value="Выход"/>
+            </form>
+
+        </nav>
+
+    </header>
+</body>
+</html>

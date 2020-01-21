@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+
+    <div th:replace="fragments/head :: head"></div>
+    <link rel="stylesheet" href="../static/res/styles/inputs.css">
+
+</head>
+<body>
+<div class="container text-center mt-5 pt-4">
+    <header>
+        <a href="/main">
+            <img alt="Главная страница" src="../static/res/main_icon.svg" height="90">
+        </a>
+    </header>
+
+    <main>
+        <div class="mt-5">
+            <div th:if="${mes}" class="mb-2" style="color: red">[[${mes}]]</div>
+            <form method="post" th:action="@{/registration}">
+                <input class="text-input" name="nickname" type="text" placeholder="Имя" required><br><br>
+                <input class="text-input" name="username" type="text" placeholder="Логин" required><br><br>
+                <input class="text-input" name="password" type="password" placeholder="Пароль" required><br><br>
+                <input class="text-input" name="email" type="email" placeholder="Электронная почта" required><br><br>
+                <input class="btn btn-primary mt-3" type="submit" value="Зарегистрироваться">
+            </form>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+
+    <div th:replace="fragments/scripts.html :: scripts"></div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Рейтинг</title>
+    <link rel="stylesheet" href="../static/res/styles/rating.css">
+
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <main>
+        <div>
+            <div align="center" th:each="user : ${users}" class="row user" style="margin-bottom: 10px">
+                <div class="col-xs m-2">
+                    <a th:href="@{/userId(userId=${user.getId()})}">
+                        <img th:src="@{'/img/' + ${user.getId()} + '.jpg'}"
+                             onerror="this.src='/img/default.svg'"
+                             alt="Изображение"
+                             height="128"
+                             width="128">
+                    </a>
+                </div>
+                <div class="col-2 mt-5 ml-5 mr-5">
+                    <p style="font-size: 20px">[[${user.getNickname()}]]</p>
+                </div>
+                <div class="col-2 mt-5 ml-5 mr-2">
+                    <p style="font-size: 20px; color: green">[[${user.getCoins()}]]</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

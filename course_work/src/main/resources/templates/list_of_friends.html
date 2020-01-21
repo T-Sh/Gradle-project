@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="rus" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Друзья</title>
+    <link rel="stylesheet" href="../static/res/styles/inputs.css">
+
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<div class="container text-center">
+
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <main>
+        <div class="mb-4">
+            <form method="post" th:action="@{/filter_friends}">
+                <label>Поиск:
+                    <input style="width: 350px" class="text-input ml-2" name="filter" type="text" placeholder="Введите имя">
+                </label>
+                <input class="btn btn-info ml-3 mr-5" type="submit" value="Найти">
+                <a href="/find_new_friend" class="btn btn-light ml-5">Поиск новых друзей</a>
+            </form>
+        </div>
+
+        <h3 class="mb-2">Список друзей</h3>
+
+        <div class="card-columns mt-5">
+            <div class="card"
+                 style="width: 200px; background-color: cyan; border: 1px solid black"
+                 th:if="${!friends.isEmpty()}" th:each="user : ${friends}">
+                <a th:href="@{/userId(userId=${user.getId()})}">
+                    <div>
+                        <img class="card-img-top img-fluid"
+                             th:src="@{'/img/' + ${user.getId()} + '.jpg'}"
+                             onerror="this.src='/img/default.svg'"
+                             alt="Изображение"
+                             height="128"
+                             width="128">
+                        <div class="card-body">
+                            <p class="card-title" th:text="${user.getNickname()}"></p>
+                            <a class="btn btn-danger card-text" th:href="@{/remove_friend(userId=${user.getId()})}">Удалить из друзей</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div th:unless="${!friends.isEmpty()}">
+            <p style="color: red; font-size: 22px">Список пуст! Попробуйте <a href="/find_new_friend">найти</a> кого-нибудь.</p>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+
+</div>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

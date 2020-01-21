@@ -1,0 +1,18 @@
+.text-input:focus {
+    -webkit-box-shadow: 0px 0px 5px #007eff;
+    -moz-box-shadow: 0px 0px 5px #007eff;
+    box-shadow: 0px 0px 5px #007eff;
+}
+
+.text-input {
+    width: 250px;
+    padding: 5px;
+    font-size: 15px;
+    text-shadow: 0px 1px 0px #fff;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #717171;
+    -webkit-box-shadow: 0px 0px 5px #007eff;
+    -moz-box-shadow: 1px 1px 0px #007eff;
+    box-shadow: 1px 1px 0px #007eff;
+}

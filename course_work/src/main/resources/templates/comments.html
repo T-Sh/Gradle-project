@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Комментарии</title>
+    <link rel="stylesheet" href="../static/res/styles/inputs.css">
+    <link rel="stylesheet" href="../static/res/styles/comment.css">
+
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<div class="container text-center">
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <main>
+        <div class="mb-4">
+            <form method="post" th:action="@{/create_comment(goalId=${goal})}">
+
+                <p><textarea class="text-input" name="text" rows="3" style="width: 400px"></textarea></p>
+                <input class="btn btn-light" type="submit" value="Отправить">
+
+            </form>
+        </div>
+
+        <div class="row comment" th:each="comment : ${comments}">
+            <div class="col-2 mt-2 mb-2">
+                <a th:href="@{/userId(userId=${comment.getAuthor()})}">
+                    <img class="img-fluid"
+                         th:src="@{'/img/' + ${comment.getAuthor()} + '.jpg'}"
+                         onerror="this.src='/img/default.svg'"
+                         alt="Изображение"
+                         height="128" width="128">
+                </a>
+            </div>
+            <div class="col-1 mt-4 mb-1">
+                <p>[[${userRepo.findById(comment.getAuthor()).get().getNickname()}]]</p>
+            </div>
+            <div class="col mt-3 mb-2" style="background-color: white; border: 1px solid black;border-radius: 4px">
+                <p class="m-2">[[${comment.getText()}]]</p>
+            </div>
+            <div class="col-1">
+                <p style="font-size: 12px">[[${comment.getDateOfCreation()}]]</p>
+                <a class="mt-1 mr-1" style="color: red" th:if="${check}" th:href="@{/delete_comment(comment = ${comment.getId()})}">
+                    Удалить
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+
+</div>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

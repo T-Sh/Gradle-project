@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="rus"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание цели</title>
+
+    <div th:replace="fragments/head :: head"></div>
+    <link rel="stylesheet" href="../static/res/styles/inputs.css">
+
+</head>
+<body>
+
+<div class="container text-center">
+
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <div>
+        <form th:action="@{/create}" name="create" method="post">
+            <div class="mt-3 mb-3">
+                <p style="font-size: 20px">Установите цель</p>
+                <p><textarea class="text-input" cols="45" rows="6" name="text"></textarea></p>
+            </div>
+            <div class="mb-3">
+                <p style="font-size: 20px">Выберите дату выполнения</p>
+                <p><input class="text-input" name="setTime" type="date"></p>
+                <div style="color: red; font-size: 16px" th:if="${mes}">[[${mes}]]</div>
+            </div>
+            <input class="btn btn-success mt-3" type="submit" value="Сохранить">
+        </form>
+
+    </div>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+
+</div>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>

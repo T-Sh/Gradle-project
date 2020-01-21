@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>История</title>
+
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+
+<div class="container text-center">
+    <div th:replace="fragments/header.html :: header"></div>
+
+    <div>
+        <table class="table table-hover">
+            <tr>
+                <th>Дата</th>
+                <th>Действие</th>
+                <th>Количество баллов</th>
+            </tr>
+            <tr th:each="line : ${history}">
+                <td>[[${line.getDate()}]]</td>
+                <td>[[${cost.findById(line.getEventId()).getName()}]]</td>
+                <td th:if="${line.getCoins() > 0}" style="color: green" th:text="'+' + ${line.getCoins()}"></td>
+                <td th:unless="${line.getCoins() > 0}" style="color: red" th:text="${line.getCoins()}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div>
+
+<div th:replace="fragments/scripts.html :: scripts"></div>
+
+</body>
+</html>
